@@ -36,16 +36,16 @@ class Main {
       ArrayList<Integer> omoves) {
     System.out.println("It is X's turn. Input your desired move.");
     cmd = input.nextInt();
-    xcheck1(cmd, xmoves, input, board);
-    xcheck2(cmd, omoves, input, xmoves, board);
+    xcheck1(cmd, xmoves, input, omoves, board);
+    // xcheck2(cmd, omoves, input, xmoves, board);
   }
 
   public static void oTurn(int cmd, Scanner input, String[][] board, ArrayList<Integer> xmoves,
       ArrayList<Integer> omoves) {
     System.out.println("It is O's turn. Input your desired move.");
     cmd = input.nextInt();
-    ocheck1(cmd, omoves, input, board);
-    ocheck2(cmd, xmoves, input, omoves, board);
+    ocheck1(cmd, omoves, input, xmoves, board);
+    // ocheck2(cmd, xmoves, input, omoves, board);
 
   }
 
@@ -146,51 +146,61 @@ class Main {
     System.out.println();
   }
 
-  public static void xcheck1(int cmd, ArrayList<Integer> xmoves, Scanner input,
+  public static void xcheck1(int cmd, ArrayList<Integer> xmoves, Scanner input, ArrayList<Integer> omoves,
       String[][] board) {
+    boolean startOver = false;
+
     for (int i : xmoves) {
       while (i == cmd) {
         System.out.println("Not an available space. Please try again :");
         cmd = input.nextInt();
+        startOver = true;
       }
     }
-    // xmove(cmd, xmoves, board, "X");
-  }
-
-  public static void xcheck2(int cmd, ArrayList<Integer> omoves, Scanner input, ArrayList<Integer> xmoves,
-      String[][] board) {
 
     for (int i : omoves) {
       while (i == cmd) {
         System.out.println("Not an available space. Please try again :");
         cmd = input.nextInt();
+        startOver = true;
       }
     }
+
+    if (startOver == true) {
+      xcheck1(cmd, xmoves, input, omoves, board);
+    }
+
     xmove(cmd, xmoves, board, "X");
     printBoard(board);
   }
 
-  public static void ocheck1(int cmd, ArrayList<Integer> omoves, Scanner input,
+  public static void ocheck1(int cmd, ArrayList<Integer> omoves, Scanner input, ArrayList<Integer> xmoves,
       String[][] board) {
+    boolean startOver = false;
+
     for (int i : omoves) {
       while (i == cmd) {
         System.out.println("Not an available space. Please try again :");
         cmd = input.nextInt();
+        startOver = true;
       }
     }
-    // omove(cmd, omoves, board, "O");
-  }
-
-  public static void ocheck2(int cmd, ArrayList<Integer> xmoves, Scanner input,
-      ArrayList<Integer> omoves, String[][] board) {
 
     for (int i : xmoves) {
       while (i == cmd) {
         System.out.println("Not an available space. Please try again :");
         cmd = input.nextInt();
+        startOver = true;
       }
     }
+
+    if (startOver == true) {
+      ocheck1(cmd, omoves, input, xmoves, board);
+    }
+
     omove(cmd, omoves, board, "O");
     printBoard(board);
+
   }
+
 }
