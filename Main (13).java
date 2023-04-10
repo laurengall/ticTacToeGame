@@ -1,25 +1,32 @@
+
+// importing classes
 import java.util.Scanner;
 import java.util.ArrayList;
 
 class Main {
   public static void main(String[] args) {
     Scanner input = new Scanner(System.in);
+    // ArrayLists to hold moves of players
     ArrayList<Integer> xmoves = new ArrayList<Integer>();
     ArrayList<Integer> omoves = new ArrayList<Integer>();
+    // initialize user command
     int cmd = 0;
-
+    // move key printed for user
     System.out.println("Move Key: ");
     System.out.println();
     System.out.println("1|2|3");
     System.out.println("4|5|6");
     System.out.println("7|8|9");
     System.out.println();
+    // empty board printed for user
     System.out.println();
     System.out.println("_|_|_");
     System.out.println("_|_|_");
     System.out.println(" | | ");
     System.out.println();
+    // initialize board
     String[][] board = new String[3][3];
+    // x goes first
     xTurn(cmd, input, board, xmoves, omoves);
     oTurn(cmd, input, board, xmoves, omoves);
     xTurn(cmd, input, board, xmoves, omoves);
@@ -46,7 +53,6 @@ class Main {
   }
 
   public static void xmove(int cmd, ArrayList<Integer> xmoves, String[][] board, String str) {
-
     switch (cmd) {
       case 1:
         xmoves.add(1);
@@ -88,7 +94,6 @@ class Main {
   }
 
   public static void omove(int cmd, ArrayList<Integer> omoves, String[][] board, String str) {
-
     switch (cmd) {
       case 1:
         omoves.add(1);
@@ -145,7 +150,6 @@ class Main {
   public static void xcheck(int cmd, ArrayList<Integer> xmoves, Scanner input, ArrayList<Integer> omoves,
       String[][] board) {
     boolean startOver = false;
-
     for (int i : xmoves) {
       while (i == cmd) {
         System.out.println("Not an available space. Please try again :");
@@ -153,7 +157,6 @@ class Main {
         startOver = true;
       }
     }
-
     for (int i : omoves) {
       while (i == cmd) {
         System.out.println("Not an available space. Please try again :");
@@ -161,11 +164,9 @@ class Main {
         startOver = true;
       }
     }
-
     if (startOver == true) {
       xcheck(cmd, xmoves, input, omoves, board);
     }
-
     xmove(cmd, xmoves, board, "X");
     printBoard(board);
   }
@@ -173,7 +174,6 @@ class Main {
   public static void ocheck(int cmd, ArrayList<Integer> omoves, Scanner input, ArrayList<Integer> xmoves,
       String[][] board) {
     boolean startOver = false;
-
     for (int i : omoves) {
       while (i == cmd) {
         System.out.println("Not an available space. Please try again :");
@@ -181,7 +181,6 @@ class Main {
         startOver = true;
       }
     }
-
     for (int i : xmoves) {
       while (i == cmd) {
         System.out.println("Not an available space. Please try again :");
@@ -189,14 +188,10 @@ class Main {
         startOver = true;
       }
     }
-
     if (startOver == true) {
       ocheck(cmd, omoves, input, xmoves, board);
     }
-
     omove(cmd, omoves, board, "O");
     printBoard(board);
-
   }
-
 }
