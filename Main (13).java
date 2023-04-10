@@ -6,7 +6,6 @@ class Main {
     Scanner input = new Scanner(System.in);
     ArrayList<Integer> xmoves = new ArrayList<Integer>();
     ArrayList<Integer> omoves = new ArrayList<Integer>();
-    boolean running = true;
     int cmd = 0;
 
     System.out.println("Move Key: ");
@@ -36,17 +35,14 @@ class Main {
       ArrayList<Integer> omoves) {
     System.out.println("It is X's turn. Input your desired move.");
     cmd = input.nextInt();
-    xcheck1(cmd, xmoves, input, omoves, board);
-    // xcheck2(cmd, omoves, input, xmoves, board);
+    xcheck(cmd, xmoves, input, omoves, board);
   }
 
   public static void oTurn(int cmd, Scanner input, String[][] board, ArrayList<Integer> xmoves,
       ArrayList<Integer> omoves) {
     System.out.println("It is O's turn. Input your desired move.");
     cmd = input.nextInt();
-    ocheck1(cmd, omoves, input, xmoves, board);
-    // ocheck2(cmd, xmoves, input, omoves, board);
-
+    ocheck(cmd, omoves, input, xmoves, board);
   }
 
   public static void xmove(int cmd, ArrayList<Integer> xmoves, String[][] board, String str) {
@@ -146,7 +142,7 @@ class Main {
     System.out.println();
   }
 
-  public static void xcheck1(int cmd, ArrayList<Integer> xmoves, Scanner input, ArrayList<Integer> omoves,
+  public static void xcheck(int cmd, ArrayList<Integer> xmoves, Scanner input, ArrayList<Integer> omoves,
       String[][] board) {
     boolean startOver = false;
 
@@ -167,14 +163,14 @@ class Main {
     }
 
     if (startOver == true) {
-      xcheck1(cmd, xmoves, input, omoves, board);
+      xcheck(cmd, xmoves, input, omoves, board);
     }
 
     xmove(cmd, xmoves, board, "X");
     printBoard(board);
   }
 
-  public static void ocheck1(int cmd, ArrayList<Integer> omoves, Scanner input, ArrayList<Integer> xmoves,
+  public static void ocheck(int cmd, ArrayList<Integer> omoves, Scanner input, ArrayList<Integer> xmoves,
       String[][] board) {
     boolean startOver = false;
 
@@ -195,7 +191,7 @@ class Main {
     }
 
     if (startOver == true) {
-      ocheck1(cmd, omoves, input, xmoves, board);
+      ocheck(cmd, omoves, input, xmoves, board);
     }
 
     omove(cmd, omoves, board, "O");
